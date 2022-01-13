@@ -1,0 +1,28 @@
+- hosts: "{{ host }}"
+  tasks:
+  - name: stop php
+    service: name=php-fpm state=stopped
+    ignore_errors: yes
+  - name: remove php
+    yum: name=php* state=removed
+  - name: stop nginx
+    service: name=nginx state=stopped
+    ignore_errors: yes #忽略执行错误继续向下执行
+  - name: remove nginx-conf
+    file: path={{item}} state=absent
+    with_items:
+     - /usr/local/nginx/  
+     - /etc/init.d/nginx  
+     - /usr/bin/nginx  
+     - /var/log/nginx/ 
+     - /tmp/nginx/
+  - name: stop mysql
+    service: name=mysql state=stopped
+    ignore_errors: yes
+  - name: remove mysql-conf
+    file: path={{item}} state=absent
+    with_items:
+     - /etc/init.d/mysqld 
+     - /usr/local/mysql
+  - name: remove mysql-conf
+    shell: rm -rf /usr/bin/mysql* 
