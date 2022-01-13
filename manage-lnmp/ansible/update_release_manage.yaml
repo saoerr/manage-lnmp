@@ -1,0 +1,12 @@
+- hosts: "{{ host }}"
+  tasks:
+  - name: unzip web-package
+    unarchive: src={{ path  }} dest=/opt/html
+  - name: delete old soft link
+    file: path=/usr/local/nginx/html/wp state=absent
+  - name: create new soft link
+    file: src={{ new_path  }} dest=/usr/local/nginx/html/wp state=link
+  - name: add env 
+    shell: IP=`hostname -i` && sed -i "s/192.168.153.12/$IP/" /usr/local/nginx//html/wp/wp-config.php
+  - name: restart php-fpm
+    service: name=php-fpm state=restarted

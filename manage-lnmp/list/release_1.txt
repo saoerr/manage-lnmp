@@ -1,0 +1,2 @@
+192.168.153.12 | CHANGED | rc=0 >>
+lrwxrwxrwx. 1 root root 16 Sep 15 09:10 /usr/local/nginx/html/wp -> /opt/html/wp-1.1
