@@ -1,4 +1,0 @@
-- hosts: "{{ host }}"
-  tasks:
-  - name: unzip web-package
-    unarchive: src={{ path  }} dest=/usr/local/nginx/html/ 

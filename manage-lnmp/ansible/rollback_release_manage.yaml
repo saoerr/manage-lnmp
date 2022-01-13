@@ -1,8 +1,0 @@
-- hosts: "{{ host }}"
-  tasks:
-  - name: delete old soft link
-    file: path=/usr/local/nginx/html/wp state=absent
-  - name: create new soft link
-    file: src={{ new_path  }} dest=/usr/local/nginx/html/wp state=link
-  - name: restart php-fpm
-    service: name=php-fpm state=restarted
